@@ -94,17 +94,51 @@ function gameOn() {
     console.log(set);
 
     let label = evaluator(set);
-    document.getElementById('result').innerHTML = assignLabel(label);
+    // console.log(label);
+    // document.getElementById('result').innerHTML = assignLabel(label);
+
+    
+        
+    let arr = Object.values(playerScores);
+    // console.log(arr);
+    let win =  winner(label,arr,currMatch);
+    console.log(win);
+    // let allSame = new Set();
+    // allSame = win;
+    // if(allSame.size == 1)
+    //     console.log(allSame);
+    let z = win.toString();
+    document.getElementById('result').innerHTML = `<h3>${z}</h3>`;
 
 
     
+}
+
+function winner(x,y,z) {
+
+    // let player = ["Player 1","Player 2","Player 3"];
+    let player = [z.player1,z.player2,z.player3];
+    let w = [];
+    if(x == 0)
+        return "Match Tie";
+    else if(x == 4){
+        // console.log(player[x]);
+        return "Match Tie";
+    }
+    else {
+    for(let i=0;i<y.length;i++){
+        if(x==y[i])
+            w.push(player[i]);
+        }
+    return w;
+    }
 }
 
 
 function evaluator(y){
     
     if(y.size == 1){
-        return y.values().next().value;
+        return 4;
     }
     else if(y.size == 3){
         return 0;
@@ -117,6 +151,5 @@ function evaluator(y){
         else if(y.has(1) && y.has(3))
             return 1;
     }
-    console.log(y);
 }
 
