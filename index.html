@@ -14,29 +14,43 @@
 
 <body>
     <div class="container" id="GamePad">
-        <div class="camera">
-            <video id="video">Video stream not available.</video>
-            <!-- <button id="startbutton">Take photo</button> -->
-        </div>
-
         <form id="myForm">
             <div class="row m-5">
                 <div class="col-4">
-
-                    <div class="profile_pic_holder d-flex justify-content-center bg-primary rounded-circle align-items-center text-light" style="height: 220px;">Click to capture</div>
-                    <!-- <img src="img/123.png" class="ml-5" style="border-radius: 50%;" height="60%" width="60%"> -->
+                    <div class="profile_pic_holder" id="setImg">
+                        <img src="img/123.png" id="defaultImg1" style="border-radius:50%;" height="60%" width="60%">
+    
+                        <div class="camera">
+                            <video id="video1" style="border-radius: 50%; display: none;" height="60%" width="60%">Video stream not available.</video>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="cambutton1">Open Camera</button>
+    
                     <input type="text" class="form-control mb-4 mt-4" id="player1name" placeholder="Player 1">
                     <input type="text" class="form-control" id="player1choice" placeholder="Player One Choice">
                 </div>
+    
                 <div class="col-4">
-                    <div class="profile_pic_holder d-flex justify-content-center bg-primary rounded-circle align-items-center text-light" style="height: 220px; border-radius: 50%">Click to capture</div>                    
-                    <!-- <img src="img/123.png" class="ml-5" style="border-radius: 50%;" height="60%" width="60%"> -->
+                    <div class="profile_pic_holder">
+                    <img src="img/123.png" id="defaultImg2" style="border-radius: 50%;" height="60%" width="60%">
+    
+                        <div class="camera">
+                            <video id="video2" style="border-radius: 50%; display: none;" height="60%" width="60%">Video stream not available.</video>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="cambutton2">Open Camera</button>
                     <input type="text" class="form-control mb-4 mt-4" id="player2name" placeholder="Player 2">
                     <input type="text" class="form-control" id="player2choice" placeholder="Player Two Choice">
                 </div>
+    
                 <div class="col-4">
-                    <div class="profile_pic_holder d-flex justify-content-center bg-primary rounded-circle align-items-center text-light" style="height: 220px;">Click to capture</div>                    
-                    <!-- <img src="img/123.png" class="ml-5" style="border-radius: 50%;" height="60%" width="60%"> -->
+                    <div class="profile_pic_holder">
+                    <img src="img/123.png" id="defaultImg3" style="border-radius: 50%;" height="60%" width="60%">
+                        <div class="camera">
+                            <video id="video3" style="border-radius: 50%; display: none;" height="60%" width="60%">Video stream not available.</video>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-sm" id="cambutton3">Open Camera</button>
                     <input type="text" class="form-control mb-4 mt-4" id="player3name" placeholder="Player 3">
                     <input type="text" class="form-control" id="player3choice" placeholder="Player Three Choice">
                 </div>
