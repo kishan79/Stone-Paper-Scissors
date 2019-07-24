@@ -37,7 +37,10 @@ function saveDetails(e) {
     } else {
 
         let userDetails = JSON.parse(localStorage.getItem('details'));
-        userDetails.push(userData);
+        let currUser = userDetails[userDetails.length -1];
+        currUser = Object.assign(currUser,userData);
+        userDetails[userDetails - 1] = currUser;
+        // userDetails.push(userData);
         localStorage.setItem('details', JSON.stringify(userDetails));
 
     }
@@ -93,20 +96,13 @@ function gameOn() {
     let set = new Set([playerScores.player1score, playerScores.player2score, playerScores.player3score]);
     console.log(set);
 
-    let label = evaluator(set);
-    // console.log(label);
-    // document.getElementById('result').innerHTML = assignLabel(label);
-
-    
+    let label = evaluator(set);   
         
     let arr = Object.values(playerScores);
-    // console.log(arr);
+
     let win =  winner(label,arr,currMatch);
     console.log(win);
-    // let allSame = new Set();
-    // allSame = win;
-    // if(allSame.size == 1)
-    //     console.log(allSame);
+
     let z = win.toString();
     document.getElementById('result').innerHTML = `<h3>${z}</h3>`;
 
