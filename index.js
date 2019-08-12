@@ -1,11 +1,6 @@
 document.getElementById("myForm").addEventListener("submit", saveDetails);
 let gameAreaBtn = document.getElementById("gameArea");
-
 gameAreaBtn.style.display = "none";
-
-// document.getElementById('hideBtn').addEventListener('click',()=>{
-//     document.getElementById('GamePad').style.display = "none"
-// })
 
 function saveDetails(e) {
   let player1 = document.getElementById("player1name").value;
@@ -80,15 +75,9 @@ function assignLabel(x) {
 }
 
 function gameOn() {
-  clearInterval(t);
-  document.querySelectorAll(".randomImage").forEach(index => {
-    index.style.display = "none";
-  });
-
   document.getElementById("playButton").disabled = true;
   let playerDetails = JSON.parse(localStorage.getItem("details"));
   let currMatch = playerDetails[playerDetails.length - 1];
-  // console.log(currMatch);
 
   let playerScores = {
     player1score: generateResult(),
@@ -97,14 +86,9 @@ function gameOn() {
   };
   currMatch = Object.assign(currMatch, playerScores);
 
-  // console.log(playerScores);
-
   playerDetails[playerDetails.length - 1] = currMatch;
   localStorage.setItem("details", JSON.stringify(playerDetails));
 
-  document.querySelectorAll(".resultImg").forEach(index => {
-    index.style.display = "block";
-  });
   document.getElementById("player1").src = assignLabel(currMatch.player1score);
   document.getElementById("player2").src = assignLabel(currMatch.player2score);
   document.getElementById("player3").src = assignLabel(currMatch.player3score);
@@ -113,22 +97,18 @@ function gameOn() {
     playerScores.player2score,
     playerScores.player3score
   ]);
-  // console.log(set);
 
   let label = evaluator(set);
 
   let arr = Object.values(playerScores);
   let win = winner(label, arr, currMatch);
-  // console.log(win);
 
   let z = win.toString();
-  document.getElementById("result").innerHTML = `<h3>${z}</h3>`;
-
+  startRolling(z);
   document.getElementById("playButton").dis;
 }
 
 function winner(x, y, z) {
-  // let player = ["Player 1","Player 2","Player 3"];
   let player = [z.player1, z.player2, z.player3];
   let w = [];
   if (x == 0) return "Match Tie";
@@ -154,12 +134,28 @@ function evaluator(y) {
   }
 }
 
-let t = setInterval(() => {
-  document.querySelectorAll(".randomImage").forEach(index => {
-    index.src = getRandomString();
-    index.classList.add("heartBeat", "infinite", "animated", "faster");
-  });
-}, 500);
+const startRolling = z => {
+  let n = 1;
+  let t = setInterval(() => {
+    if (n == 5) {
+      clearInterval();
+      document.querySelectorAll(".randomImage").forEach(index => {
+        index.style.display = "none";
+      });
+      document.querySelectorAll(".resultImg").forEach(index => {
+        index.style.display = "block";
+      });
+      document.getElementById("result").innerHTML = `<h3>${z}</h3>`;
+    } else {
+      document.querySelectorAll(".randomImage").forEach(index => {
+        index.style.display = "block";
+        index.src = getRandomString();
+        index.classList.add("heartBeat", "infinite", "animated", "faster");
+      });
+      n++;
+    }
+  }, 500);
+};
 
 function getRandomString() {
   const imageUrl = ["/img/stone.png", "/img/paper.png", "/img/scissors.png"];
