@@ -69,21 +69,23 @@ function generateResult() {
 
 function assignLabel(x) {
   if (x == 1) {
-    return "Stone";
+    return "./img/stone.png";
   } else if (x == 2) {
-    return "Paper";
+    return "./img/paper.png";
   } else if (x == 3) {
-    return "Scissors";
+    return "./img/scissors.png";
   } else if (x == 0) {
     return "Tie";
   }
 }
 
 function gameOn() {
-  console.log("hello");
   clearInterval(t);
-  console.log(t);
-  console.log("hello1");
+  document.querySelectorAll(".randomImage").forEach(index => {
+    index.style.display = "none";
+  });
+
+  document.getElementById("playButton").disabled = true;
   let playerDetails = JSON.parse(localStorage.getItem("details"));
   let currMatch = playerDetails[playerDetails.length - 1];
   // console.log(currMatch);
@@ -100,15 +102,12 @@ function gameOn() {
   playerDetails[playerDetails.length - 1] = currMatch;
   localStorage.setItem("details", JSON.stringify(playerDetails));
 
-  document.getElementById("player1").innerHTML = assignLabel(
-    currMatch.player1score
-  );
-  document.getElementById("player2").innerHTML = assignLabel(
-    currMatch.player2score
-  );
-  document.getElementById("player3").innerHTML = assignLabel(
-    currMatch.player3score
-  );
+  document.querySelectorAll(".resultImg").forEach(index => {
+    index.style.display = "block";
+  });
+  document.getElementById("player1").src = assignLabel(currMatch.player1score);
+  document.getElementById("player2").src = assignLabel(currMatch.player2score);
+  document.getElementById("player3").src = assignLabel(currMatch.player3score);
   let set = new Set([
     playerScores.player1score,
     playerScores.player2score,
@@ -119,14 +118,13 @@ function gameOn() {
   let label = evaluator(set);
 
   let arr = Object.values(playerScores);
-
   let win = winner(label, arr, currMatch);
   // console.log(win);
 
   let z = win.toString();
   document.getElementById("result").innerHTML = `<h3>${z}</h3>`;
 
-  document.getElementById('playButton').dis
+  document.getElementById("playButton").dis;
 }
 
 function winner(x, y, z) {
